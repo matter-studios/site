@@ -95,7 +95,7 @@ h1.block-title {
   }
 }
 
-@media (max-width: @screen-sm-min) and (orientation:portrait) {
+@media (max-width: @screen-sm-min) {
   .video-content {
     -webkit-transform: rotate(270deg);
     -moz-transform: rotate(270deg);
@@ -142,6 +142,18 @@ h1.block-title {
   .right-rail-xs.is-selected {
     right: -160px;
     bottom: 214px;
+  }
+}
+
+@media (max-width: @screen-sm-min) and (orientation:landscape) {
+  .video-content {
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    top: 0;
   }
 }
 
