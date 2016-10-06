@@ -72,10 +72,12 @@ h1.block-title {
   color: #f0f;
   font-size: 28px;
   vertical-align: bottom;
+  line-height: 1.2em;
 }
 .meta {
   position: fixed;
   bottom: 0;
+  width: 100%;
 }
 
 
@@ -83,20 +85,33 @@ h1.block-title {
  * Mobile styles
  */
 
-@media screen and (min-width: @screen-sm-min) and (max-width: 1024px) {
-}
+ // ipad portrait
+ @media screen and (min-width: @screen-sm-min) and (max-width: 1023px) {
+   .video-content {
+     height: 100vh;
+     -webkit-transform: rotate(270deg) scale(2);
+     -moz-transform: rotate(270deg) scale (2);
+     -ms-transform: rotate(270deg) scale (2);
+   }
+   h1.block-title {
+     font-size: 190px;
+     margin-top: -200px;
+   }
+ }
 // ipad landscape
-@media screen and (min-width: @screen-sm-min) and (max-width: 1400px) {
+@media screen and (min-width: 1023px) and (max-width: 1400px) {
   .video-content {
     height: 100vh;
-    transform: scale(1.5);
+    -webkit-transform: scale(1.4);
+    -moz-transform: scale (1.4);
+    -ms-transform: scale (1.4);
   }
   h1.block-title {
     font-size: 205px;
   }
 }
 
-@media (max-width: @screen-sm-min) {
+@media (max-width: @screen-xs-max) {
   .video-content {
     -webkit-transform: rotate(270deg) scale(1.2);
     -moz-transform: rotate(270deg) scale (1.2);
