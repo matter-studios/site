@@ -1,5 +1,14 @@
 // FAQ PAGE
 var questions = document.getElementsByClassName('js-question')
+var answers = document.getElementsByClassName('js-answer')
+var audio = new Audio('./assets/audio/matter-studios.wav')
+var starterPack = document.getElementsByClassName('image--starterpack')[0]
+
+if (starterPack) {
+  starterPack.addEventListener('click', function () {
+    audio.play()
+  })
+}
 
 if (questions.length) {
   var initialFontSize = getComputedStyle(questions[0]).getPropertyValue('font-size')
@@ -9,15 +18,18 @@ if (questions.length) {
   for (var i = 0; i < questions.length; i++) {
     var q = questions[i]
     if (i < 10) {
-      q.addEventListener('click', toggleAnswer)
+      q.addEventListener('click', toggleAnswer(q))
     } else if (i % 5 == 0) {
-      q.addEventListener('click', toggleAnswer)
+      q.addEventListener('click', toggleAnswer(q))
     }
+
+    $(answers[i]).on('hide.bs.collapse', function () {
+      audio.pause()
+    })
   }
 
-  function toggleAnswer() {
-    var questionNumber = this.getAttribute('data-question-number')
-    var itemEl = this.parentElement.classList.add('is-expanded')
+  function toggleAnswer(q) {
+    var questionNumber = q.getAttribute('data-question-number')
     var answerEl = document.getElementById('a' + questionNumber)
     var svgDiv = document.getElementsByClassName('js-effect' + questionNumber)[0]
 
@@ -29,12 +41,6 @@ if (questions.length) {
   }
 
   function addEffect(svgDiv, questionNumber) {
-    var svgList = [
-      'swoosh4'
-    ]
-
-    var svgId = svgList[Math.floor(Math.random() * svgList.length)]
-    svgDiv.firstElementChild.setAttribute('src', 'assets/img/' + svgId + '.svg')
     svgDiv.classList.remove('hidden')
   }
 
@@ -47,9 +53,8 @@ if (questions.length) {
 
     closeEffectDiv.addEventListener('animationend', function () {
       svgDiv.classList.add('hidden')
-      openEffectDiv.classList.remove('hidden')
       closeEffectDiv.classList.add('hidden')
-      svgDiv.firstElementChild.removeAttribute('src')
+      openEffectDiv.removeAttribute('src')
     }, false)
   }
 }
