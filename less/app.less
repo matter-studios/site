@@ -1,3 +1,20 @@
+@initialQuestionSize: 100px;
+.generate-font-sizes(@n, @lastSize, @i: 9) when (@i =< @n) {
+  .q@{i} {
+    font-size: @lastSize - 2px;
+  }
+  .generate-font-sizes(@n, (@lastSize - 1px), (@i+1));
+}
+
+
+@initialMobileQuestionSize: 45px;
+.generate-mobile-font-sizes(@n, @lastSize, @i: 9) when (@i =< @n) {
+  .q@{i} {
+    font-size: @lastSize - 0.4px;
+  }
+  .generate-mobile-font-sizes(@n, (@lastSize - 0.4px), (@i+1));
+}
+
 .matter-logo {
   background-image: url(../assets/img/matterlogo_rgb.svg);
   width: 100%;
@@ -12,17 +29,18 @@
   padding: 0;
 }
 h1.block-title {
-  font-size: 380px;
+  font-size: 420px;
   line-height: 0.8em;
   margin-top: 250px;
 }
 .q {
-  font-size: 90px;
+  font-size: @initialQuestionSize;
   line-height: 1em;
   margin-bottom: 20px;
   display: list-item;
   cursor: pointer;
 }
+.generate-font-sizes(76, @initialQuestionSize);
 .a-wrapper {
   margin-left: -100px;
 }
@@ -31,34 +49,36 @@ h1.block-title {
   line-height: 1.1em;
   color: #f0f;
   margin-bottom: 60px;
-  // opacity: 1;
-  // max-height: none;
-  // display: block;
-  // transition: opacity 600ms, max-height 600ms, visibility 0s linear 0s;
 }
-.a.fade {
-  opacity: 0;
-  visibility: hidden;
-  margin-bottom: 0;
-  pointer-events: none;
-  max-height: 0;
-  transition: visibility 0s linear 600ms, max-height 0s, opacity 600ms;
+
+
+.image--team {
+  margin-bottom: 20px;
 }
-.a76.fade {
-  display: none;
+.image {
+  width: 100%;
 }
+
+
 .link {
   color: #f0f;
   text-decoration: underline;
 }
 .link:hover {
-  color: #000;
+  color: #f0f;
+  position: relative;
 }
-.pitchForm {
+.link:hover:after {
+  position: absolute;
+  content: url(../assets/img/wow.svg);
   display: block;
-  width: 100%;
-  height: 100vh;
+  top: -55px;
+  left: 80px;
+  width: 30%;
+  transition: all 0.3s ease-out;
 }
+
+
 .item {
   position: relative;
 }
@@ -73,43 +93,51 @@ h1.block-title {
   height: 600px;
 }
 .effect-img {
-  animation: pop 3s ease alternate infinite;
-  // -o-animation: 3s ease alternate infinite;
-  // -moz-animation: 3s ease alternate infinite;
-  // -webkit-animation: 3s ease alternate infinite;
+  animation: pop 900ms ease;
+  -webkit-animation: pop 900ms ease;
 }
 
-// @-webkit-keyframes pop {
-//   20% {
-//     transform: scale(0.5);
-//   }
-//   100% {
-//     transform: scale(2.0);
-//   }
-// }
-// @-moz-keyframes pop {
-//   20% {
-//     transform: scale(0.5);
-//   }
-//   100% {
-//     transform: scale(2.0);
-//   }
-// }
-// @-o-keyframes pop {
-//   20% {
-//     transform: scale(0.5);
-//   }
-//   100% {
-//     transform: scale(2.0);
-//   }
-// }
+@-webkit-keyframes pop {
+  20% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(2.0);
+  }
+  90% {
+    transform: scale(1);
+  }
+  100% {
+    display: none;
+  }
+}
 @keyframes pop {
   20% {
     transform: scale(0.5);
   }
-  100% {
+  50% {
     transform: scale(2.0);
   }
+  90% {
+    transform: scale(1);
+  }
+  100% {
+    display: none;
+  }
+}
+
+// forms
+.pitchForm {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  border: none;
+}
+.questionForm {
+  width: 100%;
+  height: 600px;
+  display: block;
+  border: none;
 }
 
 /*
@@ -147,10 +175,13 @@ h1.block-title {
     margin-bottom: 20px;
     line-height: 1.3em;
   }
+
+  .generate-mobile-font-sizes(76, @initialMobileQuestionSize);
+
   .a-wrapper {
     margin-left: -40px;
   }
-  .a img {
+  .image {
     max-width: 280px;
   }
   .effect {

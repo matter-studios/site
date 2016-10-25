@@ -1,4 +1,8 @@
 var questions = document.getElementsByClassName('js-question')
+var initialFontSize = getComputedStyle(questions[0]).getPropertyValue('font-size')
+var initialFontSizeNumber = Number(initialFontSize.split('px')[0])
+
+var previousFontSizeNumber
 
 for (var i = 0; i < questions.length; i++) {
   var q = questions[i]
@@ -12,10 +16,8 @@ function toggleAnswer() {
   var svgDiv = document.getElementsByClassName('js-effect' + questionNumber)[0]
 
   if (answerEl.className.indexOf('collapse in') < 0) {
-    // answerEl.classList.remove('fade')
     addEffect(svgDiv, questionNumber)
   } else {
-    // answerEl.classList.add('fade')
     removeEffect(svgDiv, questionNumber)
   }
 }
@@ -24,16 +26,12 @@ function addEffect(svgDiv, questionNumber) {
   var svgList = [
     'poof',
     'pop',
-    'slam1',
-    'slam2',
     'sparkles',
     'swoosh1',
     'swoosh2',
     'swoosh3',
     'swoosh4',
-    'swoosh5',
-    'type',
-    'wow'
+    'swoosh5'
   ]
 
   var svgId = svgList[Math.floor(Math.random() * svgList.length)]
@@ -42,6 +40,9 @@ function addEffect(svgDiv, questionNumber) {
 }
 
 function removeEffect(svgDiv, questionNumber) {
-  svgDiv.classList.add('hidden')
-  svgDiv.firstElementChild.removeAttribute('src')
+  svgDiv.firstElementChild.setAttribute('src', 'assets/img/slam2.svg')
+  setTimeout(function () {
+    svgDiv.classList.add('hidden')
+    svgDiv.firstElementChild.removeAttribute('src')
+  }, 300)
 }
