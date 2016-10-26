@@ -272,14 +272,17 @@ h1.block-title {
  * Mobile styles
  */
 
- // ipad portrait
- @media screen and (min-width: @screen-sm-min) and (max-width: 1023px) {
-
+ // ipad portrait and landscape
+ @media screen and (min-width: @screen-sm-min) and (max-width: 1000px) {
+   h1.block-title {
+     font-size: 250px;
+   }
+   .q {
+     font-size: @initialMobileQuestionSize;
+     margin-bottom: 5px;
+   }
+   .generate-mobile-font-sizes(77, @initialMobileQuestionSize);
  }
-// ipad landscape
-@media screen and (min-width: 1023px) and (max-width: 1400px) {
-
-}
 
 @media (max-width: @screen-xs-max) {
   .itemList {
@@ -295,7 +298,7 @@ h1.block-title {
     top: 0;
   }
   .q {
-    font-size: 45px;
+    font-size: @initialMobileQuestionSize;
     margin-bottom: 5px;
   }
   .a {
@@ -367,6 +370,26 @@ h1.block-title {
 }
 
 // cinema display
+@media (min-width: 1860px) {
+  .container {
+    width: 1600px;
+  }
+  h1.block-title {
+    font-size: 680px;
+  }
+  .q {
+    font-size: 120px;
+  }
+  .generate-font-sizes(77, 120px);
+  .a {
+    font-size: 80px;
+  }
+  .effect {
+    right: 50%;
+    top: -100px;
+  }
+}
+
 @media (min-width: 2560px) {
   .container {
     width: 2300px;
@@ -377,6 +400,7 @@ h1.block-title {
   .q {
     font-size: 120px;
   }
+  .generate-font-sizes(77, 120px);
   .a {
     font-size: 80px;
   }
