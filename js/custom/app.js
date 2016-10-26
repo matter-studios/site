@@ -18,45 +18,54 @@ if (questions.length) {
   for (var i = 0; i < questions.length; i++) {
     var q = questions[i]
     if (i < 10) {
-      q.addEventListener('click', toggleAnswer(q))
+      q.addEventListener('click', toggleAnswer)
     } else if (i % 5 == 0) {
-      q.addEventListener('click', toggleAnswer(q))
+      q.addEventListener('click', toggleAnswer)
     }
 
     $(answers[i]).on('hide.bs.collapse', function () {
       audio.pause()
     })
   }
+}
 
-  function toggleAnswer(q) {
-    var questionNumber = q.getAttribute('data-question-number')
-    var answerEl = document.getElementById('a' + questionNumber)
-    var svgDiv = document.getElementsByClassName('js-effect' + questionNumber)[0]
+function toggleAnswer() {
+  if (this.className.indexOf('js-question') == -1) return
 
-    if (answerEl.className.indexOf('collapse in') < 0) {
-      addEffect(svgDiv, questionNumber)
-    } else {
-      removeEffect(svgDiv, questionNumber)
-    }
+  var questionNumber = this.getAttribute('data-question-number')
+  var answerEl = document.getElementById('a' + questionNumber)
+  var svgDiv = document.getElementsByClassName('js-effect' + questionNumber)[0]
+
+  if (answerEl.className.indexOf('collapse in') < 0) {
+    addEffect(svgDiv, questionNumber)
+  } else {
+    removeEffect(svgDiv, questionNumber)
   }
+}
 
-  function addEffect(svgDiv, questionNumber) {
-    svgDiv.classList.remove('hidden')
-  }
+function addEffect(svgDiv, questionNumber) {
+  var svgList = [
+    'swoosh4'
+  ]
 
-  function removeEffect(svgDiv, questionNumber) {
-    var openEffectDiv = svgDiv.firstElementChild
-    var closeEffectDiv = svgDiv.querySelector('.effect-img--slam')
+  var svgId = svgList[Math.floor(Math.random() * svgList.length)]
+  svgDiv.firstElementChild.setAttribute('src', 'assets/img/' + svgId + '.svg')
+  svgDiv.classList.remove('hidden')
+}
 
-    openEffectDiv.classList.add('hidden')
-    closeEffectDiv.classList.remove('hidden')
+function removeEffect(svgDiv, questionNumber) {
+  var openEffectDiv = svgDiv.firstElementChild
+  var closeEffectDiv = svgDiv.querySelector('.effect-img--slam')
 
-    closeEffectDiv.addEventListener('animationend', function () {
-      svgDiv.classList.add('hidden')
-      closeEffectDiv.classList.add('hidden')
-      openEffectDiv.removeAttribute('src')
-    }, false)
-  }
+  openEffectDiv.classList.add('hidden')
+  closeEffectDiv.classList.remove('hidden')
+
+  closeEffectDiv.addEventListener('animationend', function () {
+    svgDiv.classList.add('hidden')
+    openEffectDiv.classList.remove('hidden')
+    closeEffectDiv.classList.add('hidden')
+    openEffectDiv.removeAttribute('src')
+  }, false)
 }
 
 
