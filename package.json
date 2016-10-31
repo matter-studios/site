@@ -22,5 +22,8 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
     "viewport-units-buggyfill": "^0.6.0"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1"
   }
 }
